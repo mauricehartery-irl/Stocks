@@ -35,6 +35,25 @@ function bootWidgets() {
 }
 
 bootWidgets();
+const dateLabel = document.querySelector(".eyebrow");
+const sessionLabel = document.querySelector(".heading-side div");
+function updateMarketClock() {
+  const now = new Date();
+  dateLabel.firstChild.textContent = new Intl.DateTimeFormat("en-US", {
+    weekday: "long", month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York"
+  }).format(now).toUpperCase();
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York", weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+  }).formatToParts(now);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  const minutes = Number(values.hour) * 60 + Number(values.minute);
+  const weekday = !["Sat", "Sun"].includes(values.weekday);
+  const open = weekday && minutes >= 570 && minutes < 960;
+  sessionLabel.innerHTML = `US MARKET<small>${open ? "REGULAR SESSION" : "OUTSIDE REGULAR HOURS"}</small>`;
+  document.querySelector(".heading-side .session-dot").style.background = open ? "var(--green)" : "#718096";
+}
+updateMarketClock();
+window.setInterval(updateMarketClock, 60_000);
 document.getElementById("refresh").addEventListener("click", (event) => {
   const button = event.currentTarget;
   button.classList.add("spin");

@@ -31,7 +31,7 @@ function bootWidgets() {
   widget(containers[4], "market-movers", listConfig("change"));
   widget(containers[5], "market-movers", listConfig("change"));
   widget(containers[6], "stock-heatmap", { dataSource: "SPX500", blockSize: "market_cap_basic", blockColor: "change", grouping: "sector", locale: "en", symbolUrl: "", colorTheme: "dark", exchanges: [], hasTopBar: false, isTransparent: true, width: "100%", height: "100%" });
-  widget(containers[7], "stock screener", { width: "100%", height: "100%", defaultColumn: "overview", defaultScreen: "most_capitalized", market: "america", showToolbar: true, colorTheme: "dark", locale: "en", isTransparent: true });
+  widget(containers[7], "screener", { width: "100%", height: "100%", defaultColumn: "overview", defaultScreen: "most_capitalized", market: "america", showToolbar: true, colorTheme: "dark", locale: "en", isTransparent: true });
 }
 
 bootWidgets();
